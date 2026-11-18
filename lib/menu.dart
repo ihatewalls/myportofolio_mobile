@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:myportofolio_mobile/widgets/left_drawer.dart';
+import 'package:myportofolio_mobile/experience_form.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -7,8 +9,8 @@ class MyHomePage extends StatelessWidget {
   final String kelas = "PBP E";
 
   final List<ItemHomepage> items = [
-    ItemHomepage("Lihat Proyek", Icons.folder, Colors.blue),
-    ItemHomepage("Tambah Proyek", Icons.add_circle, Colors.grey),
+    ItemHomepage("Show Experiences", Icons.folder, Colors.blue),
+    ItemHomepage("Add Experience", Icons.add_circle, Colors.grey),
     ItemHomepage("Logout", Icons.logout, Colors.red),
   ];
   @override
@@ -26,6 +28,7 @@ class MyHomePage extends StatelessWidget {
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
+      drawer: const LeftDrawer(),
       // Body halaman utama dengan padding di sekelilingnya.
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -141,6 +144,9 @@ class ItemCard extends StatelessWidget {
             ..showSnackBar(
               SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
             );
+          if (item.name == "Add Experience") {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const ExperienceFormPage()));
+          }
         },
         child: Container(
           padding: const EdgeInsets.all(8),
