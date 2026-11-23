@@ -1,5 +1,5 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:myportofolio_mobile/widgets/experience_card.dart';
+import 'package:myportofolio_mobile/widgets/item_card.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -12,6 +12,8 @@ class MyHomePage extends StatelessWidget {
     ItemHomepage("Show Experiences", Icons.folder, Colors.blue),
     ItemHomepage("Add Experience", Icons.add_circle, Colors.grey),
     ItemHomepage("Logout", Icons.logout, Colors.red),
+    ItemHomepage("Show Skills", Icons.folder, Colors.blue),
+    ItemHomepage("Add Skill", Icons.add_circle, Colors.grey),
   ];
   @override
   Widget build(BuildContext context) {
