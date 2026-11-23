@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/experience_form.dart';
+import 'package:myportofolio_mobile/screens/skill_form.dart';
 // TODO: Import ExperienceFormPage after creating it
 
 class LeftDrawer extends StatelessWidget {
@@ -65,6 +66,21 @@ class LeftDrawer extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => ExperienceFormPage(),
+              ));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.add_circle_outline),
+            title: const Text('Add Skill'),
+            // Navigate to the Add Skill screen
+            onTap: () {
+              /*
+              TODO: Add a route to SkillFormPage after creating it.
+              */
+              Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SkillFormPage(),
               ));
             },
           ),
