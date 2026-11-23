@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/experience_form.dart';
 import 'package:myportofolio_mobile/screens/skill_form.dart';
+import 'package:myportofolio_mobile/theme_notifier.dart';
 // TODO: Import ExperienceFormPage after creating it
 
 class LeftDrawer extends StatelessWidget {
@@ -9,6 +10,7 @@ class LeftDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Drawer(
       child: ListView(
         children: [
@@ -82,6 +84,14 @@ class LeftDrawer extends StatelessWidget {
               MaterialPageRoute(
                   builder: (context) => SkillFormPage(),
               ));
+            },
+          ),
+          SwitchListTile(
+            secondary: Icon(isDark ? Icons.dark_mode : Icons.light_mode),
+            title: const Text('Dark mode'),
+            value: isDark,
+            onChanged: (value) {
+              themeNotifier.value = value ? ThemeMode.dark : ThemeMode.light;
             },
           ),
         ],
