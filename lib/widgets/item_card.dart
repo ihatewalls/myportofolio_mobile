@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/screens/experience_form.dart';
 import 'package:myportofolio_mobile/screens/experience_list.dart';
 import 'package:myportofolio_mobile/screens/skill_form.dart';
+import 'package:myportofolio_mobile/widgets/auth_guard.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 
 class ItemCard extends StatelessWidget {
@@ -16,7 +17,7 @@ class ItemCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         // Aksi ketika kartu ditekan oleh pengguna.
-        onTap: () {
+        onTap: () async {
           // Menampilkan SnackBar dengan pesan interaktif.
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
@@ -24,9 +25,13 @@ class ItemCard extends StatelessWidget {
               SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
             );
           if (item.name == "Add Experience") {
+            if (await ensureLoggedIn(context)) return;
+            if (!context.mounted) return;
             Navigator.push(context, MaterialPageRoute(builder: (context) => const ExperienceFormPage()));
           } 
           if (item.name == "Add Skill") {
+            if (await ensureLoggedIn(context)) return;
+            if (!context.mounted) return;
             Navigator.push(context, MaterialPageRoute(builder: (context) => const SkillFormPage()));
           }
           if (item.name == "Show Experiences") {

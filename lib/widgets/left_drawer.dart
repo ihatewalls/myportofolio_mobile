@@ -2,7 +2,10 @@ import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/experience_form.dart';
 import 'package:myportofolio_mobile/screens/skill_form.dart';
+import 'package:myportofolio_mobile/services/auth_state.dart';
+import 'package:myportofolio_mobile/widgets/auth_guard.dart';
 import 'package:myportofolio_mobile/theme_notifier.dart';
+import 'package:provider/provider.dart';
 // TODO: Import ExperienceFormPage after creating it
 
 class LeftDrawer extends StatelessWidget {
@@ -11,6 +14,7 @@ class LeftDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isLoggedIn = context.watch<AuthState>().isLoggedIn;
     return Drawer(
       child: ListView(
         children: [
@@ -60,10 +64,12 @@ class LeftDrawer extends StatelessWidget {
             leading: const Icon(Icons.add_circle_outline),
             title: const Text('Add Experience'),
             // Navigate to the Add Experience screen
-            onTap: () {
+            onTap: () async {
               /*
               TODO: Add a route to ExperienceFormPage after creating it.
               */
+              if (await ensureLoggedIn(context)) return;
+              if (!context.mounted) return;
               Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -75,10 +81,12 @@ class LeftDrawer extends StatelessWidget {
             leading: const Icon(Icons.add_circle_outline),
             title: const Text('Add Skill'),
             // Navigate to the Add Skill screen
-            onTap: () {
+            onTap: () async {
               /*
               TODO: Add a route to SkillFormPage after creating it.
               */
+              if (await ensureLoggedIn(context)) return;
+              if (!context.mounted) return;
               Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -94,6 +102,18 @@ class LeftDrawer extends StatelessWidget {
               themeNotifier.value = value ? ThemeMode.dark : ThemeMode.light;
             },
           ),
+          if (!isLoggedIn)
+            ListTile(
+              leading: const Icon(Icons.login),
+              title: const Text('Login'),
+              onTap: () => ensureLoggedIn(context),
+            )
+          else
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Logout'),
+              onTap: () => context.read<AuthState>().logout(),
+            ),
         ],
       ),
     );
