@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/screens/experience_form.dart';
+import 'package:myportofolio_mobile/screens/experience_list.dart';
 import 'package:myportofolio_mobile/screens/skill_form.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 
@@ -27,6 +28,9 @@ class ItemCard extends StatelessWidget {
           } 
           if (item.name == "Add Skill") {
             Navigator.push(context, MaterialPageRoute(builder: (context) => const SkillFormPage()));
+          }
+          if (item.name == "Show Experiences") {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const ExperienceList()));
           }
         },
         child: Container(
